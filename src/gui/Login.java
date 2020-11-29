@@ -27,6 +27,7 @@ public class Login extends JFrame
 	private JTextField moneyText;
 	private JTextField betText;
 	private JTextField ipText;
+	private JTextField portText;
 
 	/**
 	 * Launch the application.
@@ -92,13 +93,22 @@ public class Login extends JFrame
 		betText.setColumns(10);
 
 		ipText = new JTextField();
-		ipText.setBounds(280, 150, 100, 27);
+		ipText.setBounds(180, 150, 100, 27);
 		contentPane.add(ipText);
 		ipText.setColumns(10);
 		
 		JLabel lblIp = new JLabel("Ip server :");
-		lblIp.setBounds(180, 150, 100, 27);
+		lblIp.setBounds(80, 150, 100, 27);
 		contentPane.add(lblIp);
+		
+		portText = new JTextField();
+		portText.setBounds(380, 150, 100, 27);
+		contentPane.add(portText);
+		portText.setColumns(10);
+		
+		JLabel lblPort = new JLabel("Port :");
+		lblPort.setBounds(280, 150, 100, 27);
+		contentPane.add(lblPort);
 		
 		
 		
@@ -113,9 +123,10 @@ public class Login extends JFrame
 					double money = Double.parseDouble(moneyText.getText());
 					double bet = Double.parseDouble(betText.getText());
 					String ip = ipText.getText();
+					int port = Integer.parseInt(portText.getText());
 					if(bet > money)
 						return;
-					addClient(name,money,bet,ip);	
+					addClient(name,money,bet,ip,port);	
 				}catch(NumberFormatException error){
 				}
 				
@@ -140,13 +151,13 @@ public class Login extends JFrame
 	 * @param bet the amount of the initial bet
 	 * @param ip the ip of the server
 	 */
-	private void addClient(String name, double money, double bet, String ip)
+	private void addClient(String name, double money, double bet, String ip, int port)
 	{
 		if(money > 0 && bet > 0 && money > bet && !name.equals(""))
 		{
 			dispose();
 			System.out.println(name+" with $"+money+" would like to join the game betting "+bet);
-			new GameClient(name,money,bet,ip);
+			new GameClient(name,money,bet,ip,port);
 		}
 	}
 }

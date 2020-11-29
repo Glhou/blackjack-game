@@ -27,6 +27,7 @@ public class Client
 	private DatagramSocket socket;
 	private InetAddress ip;
 	private Thread sendingThread;
+	private int port;
 	/**
 	 * default constructor for the client
 	 */
@@ -38,11 +39,12 @@ public class Client
 	 * opens a connection for the given client
 	 * @return true if connection is successful or false if not
 	 */
-	public boolean openConnection(String ip_server)
+	public boolean openConnection(String ip_server, int port_server)
 	{
 		try {
 			socket = new DatagramSocket();
 			ip = InetAddress.getByName(ip_server);
+			port = port_server;
 			return true;
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -81,7 +83,7 @@ public class Client
 		{
 			public void run()
 			{
-				DatagramPacket packet = new DatagramPacket(data,data.length,ip,8000);
+				DatagramPacket packet = new DatagramPacket(data,data.length,ip,port);
 				try {
 					socket.send(packet);
 				} catch (IOException e) {

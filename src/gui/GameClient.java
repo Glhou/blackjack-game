@@ -176,11 +176,11 @@ public class GameClient extends JFrame implements Runnable
 	/**
 	 * Create the frame.
 	 */
-	public GameClient(String name, double money, double bet, String ip) 
+	public GameClient(String name, double money, double bet, String ip,int port) 
 	{
 		setResizable(false);
 		this.myClient = new Client();
-		boolean didConnect = myClient.openConnection(ip);
+		boolean didConnect = myClient.openConnection(ip,port);
 		if(!didConnect)
 			System.err.println("failed to connect!");
 		

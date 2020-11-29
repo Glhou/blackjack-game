@@ -1,5 +1,7 @@
 package server;
 
+import java.util.Scanner; 
+
 /**
  * the class to be run on the command line to run the server
  * @author mjschaub
@@ -21,14 +23,21 @@ public class ServerCLI
 			System.out.println("Usage: Java -jar Blackjack");
 			return;
 		}
-		new ServerCLI();
+		
+		System.out.println("Entrez le port du serveur");
+		
+		Scanner in = new Scanner(System.in);
+		
+		int port = in.nextInt(); 
+        
+        new ServerCLI(port);
 		
 	}
 	/**
 	 * the constructor for the server startup class which creates a new server on port 8000
 	 */
-	public ServerCLI()
+	public ServerCLI(int port)
 	{
-		server = new Server(8000);
+		server = new Server(port);
 	}
 }
