@@ -26,6 +26,7 @@ public class Login extends JFrame
 	private JTextField nameText;
 	private JTextField moneyText;
 	private JTextField betText;
+	private JTextField ipText;
 
 	/**
 	 * Launch the application.
@@ -84,11 +85,22 @@ public class Login extends JFrame
 		JLabel lblBet = new JLabel("Beginning Bet:");
 		lblBet.setBounds(220, 251, 109, 27);
 		contentPane.add(lblBet);
-		
+
 		betText = new JTextField();
 		betText.setBounds(180, 275, 190, 27);
 		contentPane.add(betText);
 		betText.setColumns(10);
+
+		ipText = new JTextField();
+		ipText.setBounds(280, 150, 100, 27);
+		contentPane.add(ipText);
+		ipText.setColumns(10);
+		
+		JLabel lblIp = new JLabel("Ip server :");
+		lblIp.setBounds(180, 150, 100, 27);
+		contentPane.add(lblIp);
+		
+		
 		
 		JButton btnEnter = new JButton("enter");
 		btnEnter.addActionListener(new ActionListener() 
@@ -97,11 +109,16 @@ public class Login extends JFrame
 			{
 				System.out.println("A player has entered the game!");
 				String name = nameText.getText();
-				double money = Double.parseDouble(moneyText.getText());
-				double bet = Double.parseDouble(betText.getText());
-				if(bet > money)
-					return;
-				addClient(name,money,bet);
+				try{
+					double money = Double.parseDouble(moneyText.getText());
+					double bet = Double.parseDouble(betText.getText());
+					String ip = ipText.getText();
+					if(bet > money)
+						return;
+					addClient(name,money,bet,ip);	
+				}catch(NumberFormatException error){
+				}
+				
 			}
 		});
 		btnEnter.setBounds(216, 340, 117, 25);
@@ -121,14 +138,15 @@ public class Login extends JFrame
 	 * @param name the String name of the player 
 	 * @param money the total money the player has
 	 * @param bet the amount of the initial bet
+	 * @param ip the ip of the server
 	 */
-	private void addClient(String name, double money, double bet)
+	private void addClient(String name, double money, double bet, String ip)
 	{
 		if(money > 0 && bet > 0 && money > bet && !name.equals(""))
 		{
 			dispose();
 			System.out.println(name+" with $"+money+" would like to join the game betting "+bet);
-			new GameClient(name,money,bet);
+			new GameClient(name,money,bet,ip);
 		}
 	}
 }

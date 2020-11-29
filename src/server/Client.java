@@ -38,11 +38,11 @@ public class Client
 	 * opens a connection for the given client
 	 * @return true if connection is successful or false if not
 	 */
-	public boolean openConnection()
+	public boolean openConnection(String ip_server)
 	{
 		try {
 			socket = new DatagramSocket();
-			ip = InetAddress.getByName("127.0.0.1");
+			ip = InetAddress.getByName(ip_server);
 			return true;
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

@@ -176,11 +176,11 @@ public class GameClient extends JFrame implements Runnable
 	/**
 	 * Create the frame.
 	 */
-	public GameClient(String name, double money, double bet) 
+	public GameClient(String name, double money, double bet, String ip) 
 	{
 		setResizable(false);
 		this.myClient = new Client();
-		boolean didConnect = myClient.openConnection();
+		boolean didConnect = myClient.openConnection(ip);
 		if(!didConnect)
 			System.err.println("failed to connect!");
 		
@@ -660,10 +660,16 @@ public class GameClient extends JFrame implements Runnable
 			return;
 		if(choice == 0)
 		{
+			try{
 			double newBet = Double.parseDouble(JOptionPane.showInputDialog(this, "Insert next bet: ", "(eg. 500)"));
 			lblBet.setText("Current Bet: $"+newBet);
 			String playAgain = "PlayAgain,"+playerID+","+newBet+",";
 			sendAction(playAgain);	//play another game
+			}
+			catch (NumberFormatException error){
+				this.handleEndGame(arguments);
+			}
+			
 		}
 		else
 		{
