@@ -36,10 +36,10 @@ public class Server implements Runnable
 	 * the constructor for a server to be called and made on whatever port is specified
 	 * @param port
 	 */
-	public Server(int port)
+	public Server(int port_serv)
 	{
 		gameBoard = new Board();
-		this.port = port;
+		port = port_serv;
 		try {
 			this.socket = new DatagramSocket(port);
 		} catch (SocketException e) {
@@ -56,7 +56,7 @@ public class Server implements Runnable
 	public void run()
 	{
 		isRunning = true;
-		System.out.println("Server started on port 8000");
+		System.out.println("Server started on port "+String.valueOf(this.port));
 		setupClients();
 		receivePackets();
 	}
