@@ -52,7 +52,7 @@ public class Card
 	 */
 	public String getImageString()
 	{
-		String imageString = "<html>"; //"K"+Character.toString((char)0x2660); king of spades
+		String imageString = "<html><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />"; //"K"+Character.toString((char)0x2660); king of spades
 		
 		if(value < 11 && value > 1)
 			imageString+= value+"<br>";
@@ -65,13 +65,13 @@ public class Card
 		else if(value == 13)
 			imageString+="K<br>";
 		if(suit == 0)
-			imageString+=Character.toString((char)0x2660);
+			imageString+="Pic";
 		else if(suit == 1)
-			imageString+=Character.toString((char)0x2661);
+			imageString+="Coeur";
 		else if(suit == 2)
-			imageString+=Character.toString((char)0x2662);
+			imageString+="Carreau";
 		else
-			imageString+=Character.toString((char)0x2663);
+			imageString+="Trefle";
 		imageString+="</html>";
 		return imageString;
 	}
